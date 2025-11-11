@@ -1,4 +1,4 @@
-import { Component, effect, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input, output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -12,6 +12,7 @@ import { User } from '../../interfaces/user';
   imports: [ReactiveFormsModule],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditUserComponent {
   userDetails = input.required<User>();
