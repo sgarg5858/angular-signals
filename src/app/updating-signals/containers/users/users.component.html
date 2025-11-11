@@ -1,0 +1,6 @@
+<app-add-user (add)="addUser($event)"></app-add-user>
+<div>
+  @for(user of users(); track user) {
+    <app-user [user]="user" (editUser)="editUser($event)"></app-user>
+  }
+</div>

@@ -1,0 +1,11 @@
+<div class="user-info">
+    <h3>Add New User</h3>
+  <form [formGroup]="userForm">
+    <input type="text" formControlName="name" placeholder="Name" />
+    <input type="email" formControlName="email" placeholder="Email" />
+    <input type="text" formControlName="phone" placeholder="phone" />
+    <input type="text" formControlName="country" placeholder="country" />
+
+    <button type="button" (click)="addUser()">Add User</button>
+  </form>
+</div>
