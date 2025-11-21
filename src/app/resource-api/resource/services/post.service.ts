@@ -5,10 +5,10 @@ import { firstValueFrom } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class PostService {
+export class CommentService {
   #httpClient = inject(HttpClient);
 
-  getCommentsByPostId(postId: ResourceLoaderParams<number>) {
+  getCommentsByPostId(postId: ResourceLoaderParams<number | undefined>) {
     const url = `https://jsonplaceholder.typicode.com/comments/?postId=${postId}`;
     return firstValueFrom(this.#httpClient.get<any[]>(url));
   }

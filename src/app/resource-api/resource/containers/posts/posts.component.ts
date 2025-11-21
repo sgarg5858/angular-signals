@@ -1,6 +1,12 @@
-import { Component, computed, inject, resource, signal } from '@angular/core';
+import { Component, computed, inject, resource, Signal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PostService } from '../../services/post.service';
+import { CommentService } from '../../services/post.service';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { debounceTime } from 'rxjs';
+
+export function debounceSignal<T>(source: Signal<T>, timeMsec: number): Signal<T | undefined> {
+    return toSignal(toObservable(source).pipe(debounceTime(timeMsec)));
+}
 
 @Component({
   selector: 'app-posts',
@@ -10,21 +16,22 @@ import { PostService } from '../../services/post.service';
 })
 export class PostsComponent {
 
-  commentService = inject(PostService);
+  commentService = inject(CommentService);
   postId = signal<number | undefined>(undefined);
-  commentsFilter = computed(() => {
+  #commentsFilter = computed(() => {
     const postId = this.postId();
     return postId ? postId : 0;
   });
+  #debouncedCommentsFilter = debounceSignal(this.#commentsFilter, 300);
 
   commentsResource = resource({
-    request: this.commentsFilter,
+    request: this.#debouncedCommentsFilter,
     loader: (criteria) => {
       return this.commentService.getCommentsByPostId(criteria)
     },
     defaultValue: [],
   });
-  
+
   comments = this.commentsResource.value;
   loadingComments = this.commentsResource.isLoading;
   error = this.commentsResource.error;
