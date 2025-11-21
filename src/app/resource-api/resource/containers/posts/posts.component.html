@@ -1,0 +1,14 @@
+<input [(ngModel)]="postId" placeholder="Enter Post ID" />
+@if (loadingComments()) {
+    <h1 >Loading Comments....</h1>
+}
+@else {
+    <h2>Comments for Post ID: {{ postId() }}</h2>
+    <ul>
+        @for(comment of comments(); track comment.id) {
+            <li>
+                <strong>{{ comment.name }}</strong>: {{ comment.body }}
+            </li>
+        }
+    </ul>
+}

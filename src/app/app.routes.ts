@@ -8,9 +8,16 @@ export const routes: Routes = [
         (m) => m.updatingRoutes
       ),
   },
+   {
+    path: 'resource',
+    loadComponent: () =>
+      import('./resource-api/resource/containers/posts/posts.component').then(
+        (m) => m.PostsComponent
+      ),
+  },
   {
     path:'**',
-    redirectTo:'users',
+    redirectTo:'resource',
     pathMatch:'full'
   }
 ];
