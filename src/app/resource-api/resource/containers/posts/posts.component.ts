@@ -4,8 +4,10 @@ import { CommentService } from '../../services/post.service';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
 
-export function debounceSignal<T>(source: Signal<T>, timeMsec: number): Signal<T | undefined> {
-    return toSignal(toObservable(source).pipe(debounceTime(timeMsec)));
+export function debounceSignal<T>(source: Signal<T>, timeMsec: number): Signal<T > {
+    return toSignal(toObservable(source).pipe(debounceTime(timeMsec)),{
+      initialValue: source(),
+    });
 }
 
 @Component({

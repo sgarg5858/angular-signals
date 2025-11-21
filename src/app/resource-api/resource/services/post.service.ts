@@ -8,7 +8,7 @@ import { firstValueFrom } from 'rxjs';
 export class CommentService {
   #httpClient = inject(HttpClient);
 
-  getCommentsByPostId(postId: ResourceLoaderParams<number | undefined>) {
+  getCommentsByPostId(postId: ResourceLoaderParams<number>) {
     const url = `https://jsonplaceholder.typicode.com/comments/?postId=${postId}`;
     return firstValueFrom(this.#httpClient.get<any[]>(url));
   }
