@@ -4,6 +4,7 @@ import { CommentService } from '../../services/post.service';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
 
+//providing default value for debounced signal skips initial bedouncing
 export function debounceSignal<T>(source: Signal<T>, timeMsec: number): Signal<T > {
     return toSignal(toObservable(source).pipe(debounceTime(timeMsec)),{
       initialValue: source(),
