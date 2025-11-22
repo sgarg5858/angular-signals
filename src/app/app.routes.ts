@@ -16,8 +16,15 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'rxResource',
+    loadComponent: () =>
+      import('./resource-api/rxResource/containers/comments/comments.component').then(
+        (m) => m.CommentsComponent
+      ),
+  },
+  {
     path:'**',
-    redirectTo:'resource',
+    redirectTo:'rxResource',
     pathMatch:'full'
   }
 ];
