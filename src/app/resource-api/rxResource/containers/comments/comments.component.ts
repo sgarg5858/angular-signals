@@ -3,6 +3,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { CommentService } from '../../services/comment.service';
 import { debounceTime, filter, retry, switchMap, timer } from 'rxjs';
+import { CommentStore } from '../../store/comment-store.service';
 
 @Component({
   selector: 'app-comments',
@@ -11,19 +12,10 @@ import { debounceTime, filter, retry, switchMap, timer } from 'rxjs';
   styleUrl: './comments.component.scss',
 })
 export class CommentsComponent {
-  commentService = inject(CommentService);
-  postId = signal<number>(0);
+  commentStore = inject(CommentStore);
 
-  commentsResource = rxResource({
-    request: this.postId,
-    defaultValue: [],
-    loader: (params) =>
-      timer(300).pipe(
-        switchMap(()=> this.commentService.getCommentsByPostId(params)),
-      )
-  });
-
-  comments = this.commentsResource.value;
-  loadingComments = this.commentsResource.isLoading;
-  error = this.commentsResource.error;
+  postId = this.commentStore.postId;
+  loadingComments = this.commentStore.loadingComments;
+  comments = this.commentStore.comments;
+  error = this.commentStore.error;
 }
