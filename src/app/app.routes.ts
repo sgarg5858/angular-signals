@@ -22,9 +22,16 @@ export const routes: Routes = [
         (m) => m.CommentsComponent
       ),
   },
+   {
+    path: 'httpResource',
+    loadComponent: () =>
+      import('./resource-api/httpResource/components/comments/comments.component').then(
+        (m) => m.CommentsComponent
+      ),
+  },
   {
     path:'**',
-    redirectTo:'rxResource',
+    redirectTo:'httpResource',
     pathMatch:'full'
   }
 ];

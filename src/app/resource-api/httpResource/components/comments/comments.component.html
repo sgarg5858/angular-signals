@@ -1,5 +1,5 @@
 <input [(ngModel)]="postId" placeholder="Enter Post ID" />
-@if(!error()) { @if (loadingComments()) {
+@if(!error()) { @if (loading()) {
 <h1>Loading Comments....</h1>
 } @else {
 <h2>Comments for Post ID: {{ postId() }}</h2>

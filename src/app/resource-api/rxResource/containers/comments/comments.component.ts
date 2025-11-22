@@ -12,10 +12,10 @@ import { CommentStore } from '../../store/comment-store.service';
   styleUrl: './comments.component.scss',
 })
 export class CommentsComponent {
-  commentStore = inject(CommentStore);
+  #commentStore = inject(CommentStore);
 
-  postId = this.commentStore.postId;
-  loadingComments = this.commentStore.loadingComments;
-  comments = this.commentStore.comments;
-  error = this.commentStore.error;
+  postId = this.#commentStore.postId;
+  loadingComments = this.#commentStore.loadingComments;
+  comments = this.#commentStore.comments;
+  error = this.#commentStore.error;
 }
